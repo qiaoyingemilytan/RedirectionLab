@@ -11,6 +11,19 @@ public class PigLatin{
   }
 
   public static String pigLatin(String s){
+    String[] digraphs = new String[] {"bl", "br", "ch", "ck", "cl", "cr", "dr", "fl", "fr", "gh", "gl", "gr", "ng", "ph", "pl", "pr", "qu", "sc", "sh", "sk", "sl", "sm", "sn", "sp", "st", "sw", "th", "tr", "tw", "wh", "wr"};
+    boolean hasDigraph = false;
+    for(int i = 0; i < digraphs.length; i++){
+      if(s.substring(0,2).equals(digraphs[i])){
+        hasDigraph = true;
+      }
+    }
+    if(hasDigraph){
+      s = s.substring(2, s.length()-1) + s.substring(0,2) + "ay";
+    }
+    else{
+      pigLatinSimple(s);
+    }
     return "";
   }
 

@@ -1,16 +1,18 @@
 import java.util.*;
 public class PigLatin{
   public static String pigLatinSimple(String s){
+    s = s.toLowerCase();
     if(s.charAt(0) == 'a' || s.charAt(0) == 'e' || s.charAt(0) == 'i' || s.charAt(0) == 'o' || s.charAt(0) == 'u'){
       s += "hay";
     }
     else{
-      s = s.substring(1,s.length()-1) + s.charAt(0) + "ay";
+      s = s.substring(1) + s.charAt(0) + "ay";
     }
     return s;
   }
 
   public static String pigLatin(String s){
+    s = s.toLowerCase();
     String n = "";
     String[] digraphs = new String[] {"bl", "br", "ch", "ck", "cl", "cr", "dr", "fl", "fr", "gh", "gl", "gr", "ng", "ph", "pl", "pr", "qu", "sc", "sh", "sk", "sl", "sm", "sn", "sp", "st", "sw", "th", "tr", "tw", "wh", "wr"};
     boolean hasDigraph = false;
@@ -20,7 +22,7 @@ public class PigLatin{
       }
     }
     if(hasDigraph){
-      n = s.substring(2, s.length()-1) + s.substring(0,2) + "ay";
+      n = s.substring(2) + s.substring(0,2) + "ay";
     }
     else{
       n = pigLatinSimple(s);
@@ -29,6 +31,7 @@ public class PigLatin{
   }
 
   public static String pigLatinBest(String s){
+    s = s.toLowerCase();
     String n = "";
     if(s.length() > 1 && !Character.isLetter(s.charAt(s.length()-1))){
       n = pigLatin(s.substring(0,s.length()-1)) + s.charAt(s.length()-1);

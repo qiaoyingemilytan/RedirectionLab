@@ -11,6 +11,7 @@ public class PigLatin{
   }
 
   public static String pigLatin(String s){
+    String n = "";
     String[] digraphs = new String[] {"bl", "br", "ch", "ck", "cl", "cr", "dr", "fl", "fr", "gh", "gl", "gr", "ng", "ph", "pl", "pr", "qu", "sc", "sh", "sk", "sl", "sm", "sn", "sp", "st", "sw", "th", "tr", "tw", "wh", "wr"};
     boolean hasDigraph = false;
     for(int i = 0; i < digraphs.length; i++){
@@ -19,22 +20,23 @@ public class PigLatin{
       }
     }
     if(hasDigraph){
-      s = s.substring(2, s.length()-1) + s.substring(0,2) + "ay";
+      n = s.substring(2, s.length()-1) + s.substring(0,2) + "ay";
     }
     else{
-      s = pigLatinSimple(s);
+      n = pigLatinSimple(s);
     }
-    return s;
+    return n;
   }
 
   public static String pigLatinBest(String s){
-    if(Character.isLetter(s.charAt(s.length()-1))){
-      s = pigLatin(s.substring(0,s.length()-2)) + s.charAt(s.length()-1);
+    String n = "";
+    if(s.length() > 1 && !Character.isLetter(s.charAt(s.length()-1))){
+      n = pigLatin(s.substring(0,s.length()-1)) + s.charAt(s.length()-1);
     }
     else{
-      s = pigLatin(s);
+      n = pigLatin(s);
     }
-    return s;
+    return n;
   }
 
   public static void main(String[]args){
@@ -44,7 +46,7 @@ public class PigLatin{
       Scanner s = new Scanner(line);
       String newLine = "";
       while(s.hasNext()){
-        newLine += pigLatinSimple(s.next());
+        newLine += pigLatinBest(s.next());
         newLine += " ";
       }
       System.out.println(newLine);

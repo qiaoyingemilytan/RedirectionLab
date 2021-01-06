@@ -14,7 +14,7 @@ public class PigLatin{
     String[] digraphs = new String[] {"bl", "br", "ch", "ck", "cl", "cr", "dr", "fl", "fr", "gh", "gl", "gr", "ng", "ph", "pl", "pr", "qu", "sc", "sh", "sk", "sl", "sm", "sn", "sp", "st", "sw", "th", "tr", "tw", "wh", "wr"};
     boolean hasDigraph = false;
     for(int i = 0; i < digraphs.length; i++){
-      if(s.substring(0,2).equals(digraphs[i])){
+      if(s.length() > 2 && s.substring(0,2).equals(digraphs[i])){
         hasDigraph = true;
       }
     }
@@ -22,13 +22,19 @@ public class PigLatin{
       s = s.substring(2, s.length()-1) + s.substring(0,2) + "ay";
     }
     else{
-      pigLatinSimple(s);
+      s = pigLatinSimple(s);
     }
-    return "";
+    return s;
   }
 
   public static String pigLatinBest(String s){
-    return "";
+    if(Character.isLetter(s.charAt(s.length()-1))){
+      s = pigLatin(s.substring(0,s.length()-2)) + s.charAt(s.length()-1);
+    }
+    else{
+      s = pigLatin(s);
+    }
+    return s;
   }
 
   public static void main(String[]args){
